@@ -25,7 +25,7 @@
       data-aframe-version="1.0.0"
       data-docs-version="1.0.0">
   <head>
-    <title>4.2) Where Light Meets Shadow –  Docs  – TechSummer</title>
+    <title>4.2) Loop Animations - Part Two –  Docs  – TechSummer</title>
     
 
 <script>
@@ -394,6 +394,35 @@
         
       </ol>
     
+      
+
+      <!-- Section title. -->
+      <h3 class="section-title docs-section-title section-title-active">
+        <a href="/docs/1.0.0/unit4/"
+           class="section-title-link section-title-link-active">
+          4) Interactive Storytelling
+        </a>
+      </h3>
+
+      <!-- Section links. -->
+      <ol class="subnav section-subnav">
+        
+          <li class="subnav-item ">
+            <a href="/docs/1.0.0/unit4/"
+               class="subnav-link">
+              4.1) Loop Animations - Part One
+            </a>
+          </li>
+        
+          <li class="subnav-item  subnav-item-current">
+            <a href="/docs/1.0.0/unit4/4_2.html"
+               class="subnav-link current">
+              4.2) Loop Animations - Part Two
+            </a>
+          </li>
+        
+      </ol>
+    
   </div>
 </aside>
 
@@ -401,17 +430,62 @@
 <div class="content content--structured content--unit4 copy">
   <div class="copy__wrap">
     <p class="page__section">
-      <a href="/" class="borderless-link">
-        1.0.0 &rsaquo; undefined
+      <a href="/docs/1.0.0/unit4/" class="borderless-link">
+        1.0.0 &rsaquo; 4) Interactive Storytelling
       </a>
     </p>
     
-    <h1 class="page__title">4.2) Where Light Meets Shadow</h1>
+    <h1 class="page__title">4.2) Loop Animations - Part Two</h1>
 
     
     
-      <p><hr>
-Welcome to StoryBoarding Section</p>
+      <h2 id="overview"><a href="#overview" class="headerlink" title="Overview"></a>Overview</h2><p>Before, we added the <strong>Toggle Sine Animation patch</strong>. Now, let’s put the patch into action!</p>
+<h2 id="using-the-toggle-sine-animation-patch"><a href="#using-the-toggle-sine-animation-patch" class="headerlink" title="Using the Toggle Sine Animation Patch"></a>Using the Toggle Sine Animation Patch</h2><p>Let’s first talk about sines. A sine is a function that enables us to get a number that smoothly transitions between a minimum value (usually -1) and a maximum value (usually +1).  There are tons of times you’ll want smooth transitions: moving an object, fading audio, making light flash, and more.</p>
+<p>Now let’s talk about the parts of the <strong>Toggle Sine Animation patch</strong>:</p>
+<div style="text-align:center">
+    <img src="/images/techsummer/Unit4/4.2/toggle_sine_patch.jpg">
+    <br>
+    The Toggle Sine Animation patch for reference. 
+</div>
+
+<ul>
+<li><strong>Oscillate (Sine) nested patch</strong>: outputs a float (or decimcal) number which smoothly transitions between the two input values, which are blue patches.</li>
+<li><strong>Min patch</strong>: sets the minimum value.</li>
+<li><strong>Max patch</strong>: sets the maximum value.</li>
+<li><strong>Animation Speed in Seconds</strong>: how long in seconds the value will take to transition between the minimum and maximum value.</li>
+<li><strong>Ray Up from Object</strong>: not used for this section!</li>
+</ul>
+<p>The <strong>position</strong>, <strong>rotation</strong>, and <strong>scale</strong> are each controlled by three numbers: an X, Y, and Z value to represent 3D space. Our animation will use the output of the <strong>Oscillate (Sine) nested patch</strong> to change the X, Y, and Z of the <strong>scale</strong> over time, but you can use the same technique for <strong>position</strong> and <strong>rotation</strong>.</p>
+<h2 id="using-vectors"><a href="#using-vectors" class="headerlink" title="Using Vectors"></a>Using Vectors</h2><p>Vizor and many computer graphics programs organize the X, Y, and Z values of <strong>positions</strong>, <strong>rotations</strong>, and <strong>scales</strong> into what is called a <i>vector</i>.  Vectors are used because they are a universally accepted method for expressing multi-dimensional values.</p>
+<div style="text-align:center">
+    <img src="/images/techsummer/Unit4/4.2/vector.png">
+    <br>
+    Here’s a three-dimensional vector. The X value is 2, the Y value is 3, and the Z value is 5. 
+</div>
+
+<p>In Vizor, we can make a vector using the <strong>XYZ to Vector patch</strong>. Search for and add the <strong>XYZ to Vector patch</strong> or use the hotkey <strong>7</strong> on your keyboard to add to the patch area. We’re going to plug the vector into the <strong>scale</strong> of the object then oscillate the X, Y, and Z values to create the animation.</p>
+<p>Connect the output of the <strong>Oscillator (Sine) nested patch</strong> to the X, Y, and Z inputs of the <strong>XYZ to Vector patch</strong>.  Now, the X, Y, and Z of the vector will change according to our <strong>Oscillator (Sine) nested patch</strong>.</p>
+<p>The <strong>XYZ to Vector patch</strong> is going to take our changing X, Y, and Z values and output a vector we can plug into the <strong>position</strong>, <strong>rotation</strong>, or <strong>scale</strong> of objects. Connect the output of the <strong>XYZ to Vector patch</strong> to the <strong>scale</strong> on your object.</p>
+<div style="text-align:center">
+    <img src="/images/techsummer/Unit4/4.2/animate_scale.gif">
+    <br>
+    Scale Animation 
+</div>
+
+<p>Now the object’s scale should be animated! You can experiment with minimum, maximum, and speed values of the animation.</p>
+<p><div class="alert_yellow">
+  <div style="text-align:center">
+      <strong>Animation Experiments</strong>
+  </div> 
+  You can try all sorts of experiments.  You don’t have to change each of the X, Y, and Z for the <strong>XYZ to Vector patch</strong>.  You could also use multiple, different <strong>Toggle Sine Animation patches</strong> to animate the <strong>position</strong>, <strong>rotation</strong>, or <strong>scale</strong> of objects separately. We show these both below.
+  <br><br>
+  <div style="text-align:center">
+    <img src="/images/techsummer/Unit4/4.2/combo_anim.gif">
+    We’re only changing the Y value of rotatoin and we’re using two separate Toggle Sine Animation patches.
+  </div>
+</div>
+<br></p>
+<p>Nice work!  Adding oscillations can loop 3D animations endlessly.  It’s amazing how much more life is added to a Storycast project with just a little movement.  This is especially true in VR, where characters and parts of the world now feel alive!  Make sure to try your project in your VR headset to experience it fully.</p>
 
     
 
@@ -419,14 +493,8 @@ Welcome to StoryBoarding Section</p>
     <footer class="footer guide-links c">
       
         <span class="float-left">
-          <a href="/docs/1.0.0/unit4/" class="guide-link guide-link-left">← 4.1) Interactive Animations </a></span>
+          <a href="/docs/1.0.0/unit4/" class="guide-link guide-link-left">← 4.1) Loop Animations - Part One </a></span>
       
-      
-        <span class="float-right">
-          <a href="/docs/1.0.0/unit4/4_3.html" class="guide-link guide-link-right">4.3) Importing Custom Objects →</a></span>
-      
-        <span class="float-right">
-          <a href="/docs/1.0.0/unit4/4_4.html" class="guide-link guide-link-right">4.4) Test and Ship It →</a></span>
       
     </footer>
 
